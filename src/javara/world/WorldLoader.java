@@ -270,8 +270,7 @@ public class WorldLoader {
 
 				Block block = new Block(color, mass, isHologram, center, size, pitch, yaw, roll);
 				world.addWorldObject(block);
-			}
-			else if (localName.equalsIgnoreCase("ramp")) {
+			} else if (localName.equalsIgnoreCase("ramp")) {
 				boolean isHologram = false;
 				ColorRGBA color = Ramp.DEFAULT_COLOR;
 				float mass = Ramp.DEFAULT_MASS;
