@@ -2,6 +2,7 @@ package javara.world.physical;
 
 import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
 import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
@@ -9,10 +10,10 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import javara.world.VisibleObject;
-import javara.world.World;
 
 public class Hector extends VisibleObject {
 	protected ColorRGBA mainMatColor, secondaryMatColor, tertiaryMatColor;
+	protected Material secondaryMaterial, tertiaryMaterial;
 	protected Node hectorNode, headNode, legsNode;
 	protected Spatial leftLegTop, leftLegBottom, rightLegTop, rightLegBottom;
 	protected CollisionShape collisionShape;
@@ -36,33 +37,37 @@ public class Hector extends VisibleObject {
 
 	@Override
 	public void attachedToWorld() {
+		material = materialForColor(mainMatColor);
+		secondaryMaterial = materialForColor(secondaryMatColor);
+		tertiaryMaterial = materialForColor(tertiaryMatColor);
+
 		Node headGeo = (Node)world.getAssetManager().loadModel("Models/hull.mesh.xml");
 		headGeo.rotate(0, 0, 0);
 		headNode.attachChild(headGeo);
 
 		Geometry barrelTrim = (Geometry)headGeo.getChild("hull-geom-1");
-		barrelTrim.setMaterial(materialForColor(secondaryMatColor));
+		barrelTrim.setMaterial(secondaryMaterial);
 
 		Geometry hull = (Geometry)headGeo.getChild("hull-geom-2");
-		hull.setMaterial(materialForColor(mainMatColor));
+		hull.setMaterial(material);
 
 		Geometry cockpit = (Geometry)headGeo.getChild("hull-geom-3");
-		cockpit.setMaterial(materialForColor(tertiaryMatColor));
+		cockpit.setMaterial(tertiaryMaterial);
 
 		Geometry crotch = (Geometry)headGeo.getChild("hull-geom-4");
-		crotch.setMaterial(materialForColor(mainMatColor));
+		crotch.setMaterial(material);
 
 		leftLegTop = world.getAssetManager().loadModel("Models/legHigh.mesh.xml");
 		rightLegTop = leftLegTop.clone();
 
-		leftLegTop.setMaterial(materialForColor(mainMatColor));
-		rightLegTop.setMaterial(materialForColor(mainMatColor));
+		leftLegTop.setMaterial(material);
+		rightLegTop.setMaterial(material);
 
 		leftLegBottom = world.getAssetManager().loadModel("Models/legLow.mesh.xml");
 		rightLegBottom = leftLegBottom.clone();
 
-		leftLegBottom.setMaterial(materialForColor(secondaryMatColor));
-		rightLegBottom.setMaterial(materialForColor(secondaryMatColor));
+		leftLegBottom.setMaterial(secondaryMaterial);
+		rightLegBottom.setMaterial(secondaryMaterial);
 
 		leftLegTop.setLocalTranslation(-.45f, -.45f, -.2f);
 		leftLegTop.setLocalRotation(new Quaternion().fromAngles(-(FastMath.PI / 4.4f), 0, 0));
