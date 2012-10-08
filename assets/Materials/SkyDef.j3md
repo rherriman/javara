@@ -1,0 +1,21 @@
+MaterialDef SkyDef {
+
+	MaterialParameters {
+		Vector4 skyColor
+		Vector4 horizonColor
+		Vector4 groundColor
+		Float gradientHeight
+		Matrix4 cameraToWorld
+		Vector3 cameraPosition
+	}
+
+	Technique {
+		VertexShader GLSL100:   Materials/Sky.vert
+		FragmentShader GLSL100: Materials/Sky.frag
+
+		WorldParameters {
+			WorldViewProjectionMatrix
+		}
+	}
+
+}
