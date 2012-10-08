@@ -30,8 +30,7 @@ public class WorldLoader {
 			reader.setContentHandler(parser);
 			reader.parse(src);
 			return parser.get();
-		}
-		catch (SAXException ex) {
+		} catch (SAXException ex) {
 			ex.printStackTrace();
 			return null;
 		}

@@ -13,14 +13,14 @@ public class Javara extends SimpleApplication {
 	private World world;
 	private Player player;
 
-    public static void main(String[] args) {
-        Javara app = new Javara();
-        app.start();
-    }
+	public static void main(String[] args) {
+		Javara app = new Javara();
+		app.start();
+	}
 
-    @Override
-    public void simpleInitApp() {
-        bulletAppState = new BulletAppState();
+	@Override
+	public void simpleInitApp() {
+		bulletAppState = new BulletAppState();
 		bulletAppState.setThreadingType(BulletAppState.ThreadingType.PARALLEL);
 		stateManager.attach(bulletAppState);
 
@@ -34,16 +34,16 @@ public class Javara extends SimpleApplication {
 		player = new Player(world, inputManager, cam, listener, hector);
 		world.setPlayer(player);
 		world.initialize();
-    }
+	}
 
-    @Override
-    public void simpleUpdate(float tpf) {
-        world.update(tpf);
+	@Override
+	public void simpleUpdate(float tpf) {
+		world.update(tpf);
 		player.update(tpf);
-    }
+	}
 
-    @Override
-    public void simpleRender(RenderManager rm) {
-        //TODO: add render code
-    }
+	@Override
+	public void simpleRender(RenderManager rm) {
+		//TODO: add render code
+	}
 }
